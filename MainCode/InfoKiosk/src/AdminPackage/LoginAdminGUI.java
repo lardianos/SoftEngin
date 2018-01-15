@@ -16,6 +16,9 @@ import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Insets;
 import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Component;
 
 
 public class LoginAdminGUI {
@@ -45,7 +48,7 @@ public class LoginAdminGUI {
 	 */
 	public LoginAdminGUI() {
 		initialize();
-		//this.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(null);
 		
 	}
 
@@ -74,10 +77,16 @@ public class LoginAdminGUI {
 		panel_2.setMinimumSize(new Dimension(100, 100));
 		panel.add(panel_2);
 		
-		JLabel label = new JLabel("-");
-		label.setForeground(new Color(255, 255, 255));
-		label.setFont(new Font("Dialog", Font.BOLD, 24));
-		panel.add(label);
+		JLabel lblMin = new JLabel("-");
+		lblMin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.setState(JFrame.ICONIFIED);
+			}
+		});
+		lblMin.setForeground(new Color(255, 255, 255));
+		lblMin.setFont(new Font("Dialog", Font.BOLD, 24));
+		panel.add(lblMin);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setPreferredSize(new Dimension(20, 10));
@@ -85,70 +94,74 @@ public class LoginAdminGUI {
 		panel_3.setBackground(new Color(255, 102, 51));
 		panel.add(panel_3);
 		
-		JLabel lblX = new JLabel("X");
-		lblX.setForeground(new Color(255, 255, 255));
-		lblX.setFont(new Font("Dialog", Font.BOLD, 24));
-		panel.add(lblX);
+		JLabel lblClose = new JLabel("X");
+		lblClose.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		lblClose.setForeground(new Color(255, 255, 255));
+		lblClose.setFont(new Font("Dialog", Font.BOLD, 24));
+		panel.add(lblClose);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 51, 51));
 		panel_1.setForeground(new Color(0, 51, 51));
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{60, 110, 35, 0, 0, 295, 0};
-		gbl_panel_1.rowHeights = new int[]{138, 22, 35, 22, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
+		panel_1.setLayout(null);
 		
 		JLabel lblUserName = new JLabel("Username:");
+		lblUserName.setBounds(96, 138, 110, 22);
 		lblUserName.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblUserName.setForeground(new Color(255, 255, 255));
-		GridBagConstraints gbc_lblUserName = new GridBagConstraints();
-		gbc_lblUserName.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblUserName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUserName.gridx = 1;
-		gbc_lblUserName.gridy = 1;
-		panel_1.add(lblUserName, gbc_lblUserName);
+		panel_1.add(lblUserName);
 		
 		textField = new JTextField();
-		textField.setMinimumSize(new Dimension(150, 20));
+		textField.setBounds(251, 138, 174, 22);
+		textField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField.setMinimumSize(new Dimension(150, 25));
 		textField.setPreferredSize(new Dimension(1, 1));
 		textField.setForeground(new Color(255, 255, 255));
 		textField.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		textField.setCaretColor(new Color(255, 255, 255));
 		textField.setBackground(new Color(47, 79, 79));
 		textField.setMaximumSize(new Dimension(1, 1));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 1;
-		panel_1.add(textField, gbc_textField);
+		panel_1.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(96, 212, 104, 22);
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Dialog", Font.BOLD, 18));
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.anchor = GridBagConstraints.NORTH;
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 3;
-		panel_1.add(lblPassword, gbc_lblPassword);
+		panel_1.add(lblPassword);
 		
 		passwordField = new JPasswordField();
+		passwordField.setBounds(251, 210, 174, 25);
+		passwordField.setFont(new Font("Dialog", Font.PLAIN, 18));
 		passwordField.setForeground(new Color(255, 255, 255));
 		passwordField.setCaretColor(new Color(255, 255, 255));
 		passwordField.setBackground(new Color(47, 79, 79));
 		passwordField.setPreferredSize(new Dimension(1, 1));
 		passwordField.setMaximumSize(new Dimension(1, 1));
-		passwordField.setMinimumSize(new Dimension(150, 20));
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 3;
-		gbc_passwordField.gridy = 3;
-		panel_1.add(passwordField, gbc_passwordField);
+		passwordField.setMinimumSize(new Dimension(150, 25));
+		panel_1.add(passwordField);
+		
+		JButton btnLogin = new JButton("Cancel");
+		btnLogin.setFocusPainted(false);
+		btnLogin.setPreferredSize(new Dimension(1, 1));
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(178, 34, 34));
+		btnLogin.setBounds(150, 270, 87, 30);
+		panel_1.add(btnLogin);
+		
+		JButton button = new JButton("Login");
+		button.setFocusTraversalKeysEnabled(false);
+		button.setFocusPainted(false);
+		button.setPreferredSize(new Dimension(1, 1));
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 128, 128));
+		button.setBounds(270, 270, 87, 30);
+		panel_1.add(button);
 	}
 }

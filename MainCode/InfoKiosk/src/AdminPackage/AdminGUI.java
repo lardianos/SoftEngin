@@ -1,8 +1,9 @@
+package AdminPackage;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class MainGui {
+public class AdminGUI {
 
 	private JFrame frame;
 
@@ -13,7 +14,7 @@ public class MainGui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainGui window = new MainGui();
+					AdminGUI window = new AdminGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,7 +26,7 @@ public class MainGui {
 	/**
 	 * Create the application.
 	 */
-	public MainGui() {
+	public AdminGUI() {
 		initialize();
 	}
 

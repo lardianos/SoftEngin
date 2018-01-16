@@ -10,7 +10,9 @@ import java.sql.Statement;
 public class MySQLConnect {
 	Connection conn = null;
 	Statement stmt = null;
-	ResultSet rs = null;
+	//ResultSet rs = null;
+	private String theusername= null;
+	private String thepassword= null;
 	
 	public void dbconnect() {
 		try
@@ -28,5 +30,6 @@ public class MySQLConnect {
 			e.printStackTrace();
 		}		
 	}
+	
 	
 }

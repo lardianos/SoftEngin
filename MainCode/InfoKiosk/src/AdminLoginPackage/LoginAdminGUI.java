@@ -17,6 +17,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout.Alignment;
 
 import AdminGUI.AdminGUI;
+import dbconect.MySQLConnect;
 
 import java.awt.Insets;
 import java.awt.ComponentOrientation;
@@ -55,7 +56,8 @@ public class LoginAdminGUI {
 	public LoginAdminGUI() {
 		initialize();
 		frame.setLocationRelativeTo(null);
-		
+		MySQLConnect dbcon = new MySQLConnect();
+		dbcon.dbconnect();		
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package AdminPackage;
+package AdminGUI;
 
 import java.awt.EventQueue;
 
@@ -14,9 +14,6 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout.Alignment;
-
-import AdminGUI.AdminGUI;
-
 import java.awt.Insets;
 import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
@@ -26,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class LoginAdminGUI {
+public class AdminGUI {
 
 	private JFrame frame;
 	private JTextField usernametxt;
@@ -39,7 +36,7 @@ public class LoginAdminGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginAdminGUI window = new LoginAdminGUI();
+					AdminGUI window = new AdminGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +48,7 @@ public class LoginAdminGUI {
 	/**
 	 * Create the application.
 	 */
-	public LoginAdminGUI() {
+	public AdminGUI() {
 		initialize();
 		frame.setLocationRelativeTo(null);
 		
@@ -63,7 +60,7 @@ public class LoginAdminGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setUndecorated(true);
-		frame.setBounds(100, 100, 500, 400);
+		frame.setBounds(100, 100, 800, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -71,14 +68,14 @@ public class LoginAdminGUI {
 		panel.setBackground(new Color(255, 102, 51));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		JLabel lblLoginForm = new JLabel("Login Form");
+		JLabel lblLoginForm = new JLabel("Info-Kiosk Managment");
 		lblLoginForm.setForeground(Color.WHITE);
 		lblLoginForm.setFont(new Font("Dialog", Font.BOLD, 24));
 		panel.add(lblLoginForm);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 102, 51));
-		panel_2.setPreferredSize(new Dimension(250, 10));
+		panel_2.setPreferredSize(new Dimension(400, 10));
 		panel_2.setMinimumSize(new Dimension(100, 100));
 		panel.add(panel_2);
 		
@@ -168,30 +165,7 @@ public class LoginAdminGUI {
 		JButton button = new JButton("Login");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String username = usernametxt.getText();
-				String password = passwordtxt.getText();
-				
-				
-				String usernameDB = "admin";
-				String passwordDB = "1234";
-				
-				
-				if(password.equals(passwordDB) && username.equals(usernameDB)) {
-					usernametxt.setText(null);
-					passwordtxt.setText(null);
-					
-					frame.setVisible(false);
-					AdminGUI admgui = new AdminGUI();
-					admgui.main(null);
-					
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Invalid Login Details","Login Error",JOptionPane.ERROR_MESSAGE);
-					usernametxt.setText(null);
-					passwordtxt.setText(null);
-				}
-				
-				
+				//String password = 
 			}
 		});
 		button.setFocusTraversalKeysEnabled(false);

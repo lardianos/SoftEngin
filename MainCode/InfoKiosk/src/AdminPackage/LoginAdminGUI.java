@@ -1,6 +1,7 @@
 package AdminPackage;
 
 import java.awt.EventQueue;
+import com.mysql.*;
 
 //import javax.swing.JFrame;
 //import javax.swing.JPanel;

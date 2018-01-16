@@ -1,4 +1,4 @@
-package AdminPackage;
+package AdminLoginPackage;
 
 import java.awt.EventQueue;
 import com.mysql.*;

@@ -17,7 +17,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout.Alignment;
 
 import AdminGUI.AdminGUI;
-import dbconect.MySQLConnect;
+import database.MySQL;
 
 import java.awt.Insets;
 import java.awt.ComponentOrientation;
@@ -26,6 +26,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class LoginAdminGUI {
@@ -56,19 +58,19 @@ public class LoginAdminGUI {
 	public LoginAdminGUI() {
 		initialize();
 		frame.setLocationRelativeTo(null);
-		MySQLConnect dbcon = new MySQLConnect();
-		dbcon.dbconnect();		
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		MySQL dbcon = new MySQL();
+		dbcon.dbconnect();		
 		frame = new JFrame();
 		frame.setUndecorated(true);
 		frame.setBounds(100, 100, 500, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(10, 40));
 		panel.setBackground(new Color(255, 102, 51));
@@ -138,55 +140,19 @@ public class LoginAdminGUI {
 		panel_1.add(usernametxt);
 		usernametxt.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(96, 212, 104, 22);
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setFont(new Font("Dialog", Font.BOLD, 18));
-		panel_1.add(lblPassword);
-		
-		passwordtxt = new JPasswordField();
-		passwordtxt.setBounds(251, 210, 174, 25);
-		passwordtxt.setFont(new Font("Dialog", Font.PLAIN, 18));
-		passwordtxt.setForeground(new Color(255, 255, 255));
-		passwordtxt.setCaretColor(new Color(255, 255, 255));
-		passwordtxt.setBackground(new Color(47, 79, 79));
-		passwordtxt.setPreferredSize(new Dimension(1, 1));
-		passwordtxt.setMaximumSize(new Dimension(1, 1));
-		passwordtxt.setMinimumSize(new Dimension(150, 25));
-		panel_1.add(passwordtxt);
-		
-		JButton btnLogin = new JButton("Cancel");
+		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		btnLogin.setFocusPainted(false);
-		btnLogin.setPreferredSize(new Dimension(1, 1));
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(178, 34, 34));
-		btnLogin.setBounds(150, 270, 87, 30);
-		panel_1.add(btnLogin);
-		
-		JButton button = new JButton("Login");
-		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = usernametxt.getText();
 				String password = passwordtxt.getText();
 				
-				
-				String usernameDB = "admin";
-				String passwordDB = "1234";
-				
-				
-				if(password.equals(passwordDB) && username.equals(usernameDB)) {
+				if(dbcon.check_login(username, password)==true) {
 					usernametxt.setText(null);
 					passwordtxt.setText(null);
 					
 					frame.setVisible(false);
 					AdminGUI admgui = new AdminGUI();
 					admgui.main(null);
-					
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Invalid Login Details","Login Error",JOptionPane.ERROR_MESSAGE);
@@ -197,13 +163,54 @@ public class LoginAdminGUI {
 				
 			}
 		});
-		button.setFocusTraversalKeysEnabled(false);
-		button.setFocusPainted(false);
-		button.setPreferredSize(new Dimension(1, 1));
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 128, 128));
-		button.setBounds(270, 270, 87, 30);
-		panel_1.add(button);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(96, 212, 104, 22);
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Dialog", Font.BOLD, 18));
+		panel_1.add(lblPassword);
+		
+		passwordtxt = new JPasswordField();
+		passwordtxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent ent) {
+				if(ent.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnLogin.doClick();
+					
+				}
+			}
+		});
+		passwordtxt.setBounds(251, 210, 174, 25);
+		passwordtxt.setFont(new Font("Dialog", Font.PLAIN, 18));
+		passwordtxt.setForeground(new Color(255, 255, 255));
+		passwordtxt.setCaretColor(new Color(255, 255, 255));
+		passwordtxt.setBackground(new Color(47, 79, 79));
+		passwordtxt.setPreferredSize(new Dimension(1, 1));
+		passwordtxt.setMaximumSize(new Dimension(1, 1));
+		passwordtxt.setMinimumSize(new Dimension(150, 25));
+		panel_1.add(passwordtxt);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		btnCancel.setFocusPainted(false);
+		btnCancel.setPreferredSize(new Dimension(1, 1));
+		btnCancel.setForeground(new Color(255, 255, 255));
+		btnCancel.setBackground(new Color(178, 34, 34));
+		btnCancel.setBounds(150, 270, 87, 30);
+		panel_1.add(btnCancel);
+		
+		
+		btnLogin.setFocusTraversalKeysEnabled(false);
+		btnLogin.setFocusPainted(false);
+		btnLogin.setPreferredSize(new Dimension(1, 1));
+		btnLogin.setForeground(Color.WHITE);
+		btnLogin.setBackground(new Color(0, 128, 128));
+		btnLogin.setBounds(270, 270, 87, 30);
+		panel_1.add(btnLogin);
 		
 		JLabel lblWelcomeLoginTo = new JLabel("Welcome! Login to Manage Info-Kiosk.");
 		lblWelcomeLoginTo.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -211,7 +218,7 @@ public class LoginAdminGUI {
 		lblWelcomeLoginTo.setBounds(51, 51, 398, 38);
 		panel_1.add(lblWelcomeLoginTo);
 		
-		JLabel lblCopyrightTriakilakodikaae = new JLabel("Copyright 2018 Tria-Kila-Kodika-AE.");
+		JLabel lblCopyrightTriakilakodikaae = new JLabel("Copyright cc 2018 Tria-Kila-Kodika-AE.");
 		lblCopyrightTriakilakodikaae.setFont(new Font("Dialog", Font.BOLD, 9));
 		lblCopyrightTriakilakodikaae.setForeground(new Color(255, 255, 255));
 		lblCopyrightTriakilakodikaae.setBounds(162, 333, 184, 15);

@@ -1,4 +1,4 @@
-package dbconect;
+package database;
 
 import com.mysql.*;
 import java.sql.Connection;

@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,8 +27,6 @@ import java.awt.event.ActionEvent;
 public class AdminGUI {
 
 	private JFrame frame;
-	private JTextField usernametxt;
-	private JPasswordField passwordtxt;
 
 	/**
 	 * Launch the application.
@@ -37,7 +36,10 @@ public class AdminGUI {
 			public void run() {
 				try {
 					AdminGUI window = new AdminGUI();
+					
 					window.frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,25 +62,30 @@ public class AdminGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setUndecorated(true);
-		frame.setBounds(100, 100, 800, 700);
+		//frame.setBounds(100, 100, 800, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setUndecorated(true);
+		/*dimensions*/
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		Dimension frontbar=new Dimension(); 
+
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(10, 40));
 		panel.setBackground(new Color(255, 102, 51));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
+		
 		JLabel lblLoginForm = new JLabel("Info-Kiosk Managment");
 		lblLoginForm.setForeground(Color.WHITE);
 		lblLoginForm.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblLoginForm.setLocation(10, 5);
 		panel.add(lblLoginForm);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 102, 51));
-		panel_2.setPreferredSize(new Dimension(400, 10));
-		panel_2.setMinimumSize(new Dimension(100, 100));
-		panel.add(panel_2);
 		
+				
 		JLabel lblMin = new JLabel("-");
 		lblMin.addMouseListener(new MouseAdapter() {
 			@Override
@@ -88,13 +95,7 @@ public class AdminGUI {
 		});
 		lblMin.setForeground(new Color(255, 255, 255));
 		lblMin.setFont(new Font("Dialog", Font.BOLD, 24));
-		panel.add(lblMin);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setPreferredSize(new Dimension(20, 10));
-		panel_3.setMinimumSize(new Dimension(100, 100));
-		panel_3.setBackground(new Color(255, 102, 51));
-		panel.add(panel_3);
 		
 		JLabel lblClose = new JLabel("X");
 		lblClose.addMouseListener(new MouseAdapter() {
@@ -105,87 +106,48 @@ public class AdminGUI {
 		});
 		lblClose.setForeground(new Color(255, 255, 255));
 		lblClose.setFont(new Font("Dialog", Font.BOLD, 24));
+
+		
+		frontbar.setSize((width/1.3)-(lblLoginForm.getWidth()+lblClose.getWidth()+lblMin.getWidth()), 10);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 102, 51));		
+		panel_2.setPreferredSize(frontbar);
+		panel_2.setMinimumSize(new Dimension(100, 100));
+		panel.add(panel_2);
+		
+		panel.add(lblMin);
+		
+				
+		JPanel panel_3 = new JPanel();
+		panel_3.setPreferredSize(new Dimension(20, 10));
+		panel_3.setMinimumSize(new Dimension(100, 100));
+		panel_3.setBackground(new Color(255, 102, 51));
+		panel.add(panel_3);
 		panel.add(lblClose);
 		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 51, 51));
 		panel_1.setForeground(new Color(0, 51, 51));
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
 		
-		JLabel lblUserName = new JLabel("Username:");
-		lblUserName.setBounds(96, 138, 110, 22);
-		lblUserName.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblUserName.setForeground(new Color(255, 255, 255));
-		panel_1.add(lblUserName);
-		
-		usernametxt = new JTextField();
-		usernametxt.setBounds(251, 138, 174, 22);
-		usernametxt.setFont(new Font("Dialog", Font.PLAIN, 18));
-		usernametxt.setMinimumSize(new Dimension(150, 25));
-		usernametxt.setPreferredSize(new Dimension(1, 1));
-		usernametxt.setForeground(new Color(255, 255, 255));
-		usernametxt.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		usernametxt.setCaretColor(new Color(255, 255, 255));
-		usernametxt.setBackground(new Color(47, 79, 79));
-		usernametxt.setMaximumSize(new Dimension(1, 1));
-		panel_1.add(usernametxt);
-		usernametxt.setColumns(10);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(96, 212, 104, 22);
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setFont(new Font("Dialog", Font.BOLD, 18));
-		panel_1.add(lblPassword);
-		
-		passwordtxt = new JPasswordField();
-		passwordtxt.setBounds(251, 210, 174, 25);
-		passwordtxt.setFont(new Font("Dialog", Font.PLAIN, 18));
-		passwordtxt.setForeground(new Color(255, 255, 255));
-		passwordtxt.setCaretColor(new Color(255, 255, 255));
-		passwordtxt.setBackground(new Color(47, 79, 79));
-		passwordtxt.setPreferredSize(new Dimension(1, 1));
-		passwordtxt.setMaximumSize(new Dimension(1, 1));
-		passwordtxt.setMinimumSize(new Dimension(150, 25));
-		panel_1.add(passwordtxt);
-		
-		JButton btnLogin = new JButton("Cancel");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		btnLogin.setFocusPainted(false);
-		btnLogin.setPreferredSize(new Dimension(1, 1));
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(178, 34, 34));
-		btnLogin.setBounds(150, 270, 87, 30);
-		panel_1.add(btnLogin);
-		
-		JButton button = new JButton("Login");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//String password = 
-			}
-		});
-		button.setFocusTraversalKeysEnabled(false);
-		button.setFocusPainted(false);
-		button.setPreferredSize(new Dimension(1, 1));
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 128, 128));
-		button.setBounds(270, 270, 87, 30);
-		panel_1.add(button);
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 0, (int) width, 103);
+		panel_4.setBackground(new Color(0, 51, 51));
+		panel_1.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblWelcomeLoginTo = new JLabel("Welcome! Login to Manage Info-Kiosk.");
+		lblWelcomeLoginTo.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_4.add(lblWelcomeLoginTo, BorderLayout.CENTER);
 		lblWelcomeLoginTo.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeLoginTo.setForeground(new Color(255, 255, 255));
-		lblWelcomeLoginTo.setBounds(51, 51, 398, 38);
-		panel_1.add(lblWelcomeLoginTo);
 		
-		JLabel lblCopyrightTriakilakodikaae = new JLabel("Copyright 2018 Tria-Kila-Kodika-AE.");
-		lblCopyrightTriakilakodikaae.setFont(new Font("Dialog", Font.BOLD, 9));
-		lblCopyrightTriakilakodikaae.setForeground(new Color(255, 255, 255));
-		lblCopyrightTriakilakodikaae.setBounds(162, 333, 184, 15);
-		panel_1.add(lblCopyrightTriakilakodikaae);
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(0, 102, 1920, 911);
+		panel_1.add(panel_5);
+		panel_5.setLayout(new BorderLayout(0, 0));
 	}
 }

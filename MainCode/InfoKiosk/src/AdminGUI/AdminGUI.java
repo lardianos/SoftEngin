@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 public class AdminGUI {
 
 	private JFrame frame;
+	private JTextField txtCcKodikasMe;
 
 	/**
 	 * Launch the application.
@@ -76,17 +77,21 @@ public class AdminGUI {
 		panel.setPreferredSize(new Dimension(10, 40));
 		panel.setBackground(new Color(255, 102, 51));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		panel.setLayout(null);
 		
 		
 		JLabel lblLoginForm = new JLabel("Info-Kiosk Managment");
+		lblLoginForm.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblLoginForm.setSize(302, 29);
 		lblLoginForm.setForeground(Color.WHITE);
 		lblLoginForm.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblLoginForm.setLocation(10, 5);
+		lblLoginForm.setLocation(774, 5);
 		panel.add(lblLoginForm);
 		
 		
 				
 		JLabel lblMin = new JLabel("-");
+		lblMin.setBounds(((int)width-65), 5, 10, 29);
 		lblMin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -98,6 +103,7 @@ public class AdminGUI {
 		
 		
 		JLabel lblClose = new JLabel("X");
+		lblClose.setBounds(((int)width-40), 5, 19, 29);
 		lblClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -110,20 +116,7 @@ public class AdminGUI {
 		
 		frontbar.setSize((width/1.3)-(lblLoginForm.getWidth()+lblClose.getWidth()+lblMin.getWidth()), 10);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 102, 51));		
-		panel_2.setPreferredSize(frontbar);
-		panel_2.setMinimumSize(new Dimension(100, 100));
-		panel.add(panel_2);
-		
 		panel.add(lblMin);
-		
-				
-		JPanel panel_3 = new JPanel();
-		panel_3.setPreferredSize(new Dimension(20, 10));
-		panel_3.setMinimumSize(new Dimension(100, 100));
-		panel_3.setBackground(new Color(255, 102, 51));
-		panel.add(panel_3);
 		panel.add(lblClose);
 		
 
@@ -146,8 +139,65 @@ public class AdminGUI {
 		lblWelcomeLoginTo.setForeground(new Color(255, 255, 255));
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 102, 1920, 911);
+		panel_5.setBackground(new Color(51, 51, 51));
+		panel_5.setBounds(0, 100, (int) width, 911);
 		panel_1.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		panel_5.setLayout(null);
+		
+		JButton btnCreateNewCategory = new JButton("Create New Category");
+		btnCreateNewCategory.setFocusTraversalKeysEnabled(false);
+		btnCreateNewCategory.setFocusPainted(false);
+		btnCreateNewCategory.setForeground(new Color(255, 255, 255));
+		btnCreateNewCategory.setBackground(new Color(0, 51, 51));
+		btnCreateNewCategory.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCreateNewCategory.setBounds(860, 120, 186, 30);
+		btnCreateNewCategory.setHorizontalTextPosition(SwingConstants.LEFT);
+		panel_5.add(btnCreateNewCategory);
+		
+		JButton btnCreateNewPoint = new JButton("Create New Point");
+		btnCreateNewPoint.setBackground(new Color(0, 51, 51));
+		btnCreateNewPoint.setForeground(new Color(255, 255, 255));
+		btnCreateNewPoint.setFocusPainted(false);
+		btnCreateNewPoint.setFocusTraversalKeysEnabled(false);
+		btnCreateNewPoint.setPreferredSize(new Dimension(186, 25));
+		btnCreateNewPoint.setMinimumSize(new Dimension(186, 25));
+		btnCreateNewPoint.setMaximumSize(new Dimension(186, 25));
+		btnCreateNewPoint.setBounds(860, 180, 186, 30);
+		btnCreateNewPoint.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnCreateNewPoint.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_5.add(btnCreateNewPoint);
+		
+		JButton btnDeleteCategory = new JButton("Delete Category");
+		btnDeleteCategory.setBackground(new Color(0, 51, 51));
+		btnDeleteCategory.setForeground(new Color(255, 255, 255));
+		btnDeleteCategory.setFocusPainted(false);
+		btnDeleteCategory.setFocusTraversalKeysEnabled(false);
+		btnDeleteCategory.setPreferredSize(new Dimension(186, 25));
+		btnDeleteCategory.setMinimumSize(new Dimension(186, 25));
+		btnDeleteCategory.setMaximumSize(new Dimension(186, 25));
+		btnDeleteCategory.setBounds(860, 240, 186, 30);
+		panel_5.add(btnDeleteCategory);
+		
+		JButton btnDeletePoint = new JButton("Delete Point");
+		btnDeletePoint.setBackground(new Color(0, 51, 51));
+		btnDeletePoint.setForeground(new Color(255, 255, 255));
+		btnDeletePoint.setFocusPainted(false);
+		btnDeletePoint.setFocusTraversalKeysEnabled(false);
+		btnDeletePoint.setPreferredSize(new Dimension(186, 25));
+		btnDeletePoint.setMinimumSize(new Dimension(186, 25));
+		btnDeletePoint.setMaximumSize(new Dimension(186, 25));
+		btnDeletePoint.setBounds(860, 300, 186, 30);
+		panel_5.add(btnDeletePoint);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBounds(0, 860,(int) width, 51);
+		panel_5.add(panel_6);
+		panel_6.setLayout(new BorderLayout(0, 0));
+		
+		txtCcKodikasMe = new JTextField();
+		txtCcKodikasMe.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCcKodikasMe.setText("CC Kodikas Me To Tsouvali AE");
+		panel_6.add(txtCcKodikasMe, BorderLayout.CENTER);
+		txtCcKodikasMe.setColumns(10);
 	}
 }

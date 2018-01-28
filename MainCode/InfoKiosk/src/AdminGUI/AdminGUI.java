@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 public class AdminGUI {
 
 	private JFrame frame;
-	private JTextField textField;
+
 	
 
 	/**
@@ -267,26 +267,31 @@ public class AdminGUI {
 		panel_3.add(btnBack1);
 		
 		JButton btnCreateCategory_1 = new JButton("Create Category");		
+		
 		btnCreateCategory_1.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
 		btnCreateCategory_1.setForeground(Color.WHITE);
 		btnCreateCategory_1.setBackground(new Color(0, 51, 51));
 		panel_3.add(btnCreateCategory_1);
 		
-		textField = new JTextField();
-		textField.setBounds(244, 103, 177, 25);
-		panel_3.add(textField);
-		textField.setColumns(10);
+		JTextField CrateCategorytextField = new JTextField();
+		CrateCategorytextField.setBounds(( ( ( int ) width/2)-93), 180, 186, 30);
+		CrateCategorytextField.setText(null);
+		panel_3.add(CrateCategorytextField);
+		CrateCategorytextField.setColumns(10);
 		
 		JLabel lblCategoryName = new JLabel("Category Name:");
-		lblCategoryName.setBounds(110, 103, 132, 25);
+		lblCategoryName.setBounds(( ( ( int ) width/2)-93-130), 180, 186, 30);
 		panel_3.add(lblCategoryName);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(337, 112, 101, 25);
-		panel_6.add(comboBox);
-		panel_3.setVisible(false);
-		db.select_query_categories(comboBox);
-		
+		btnCreateCategory_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String category = CrateCategorytextField.getText();
+					db.add_category_query(category);				
+					CrateCategorytextField.setText(null);	
+			}
+		});
+
 		
 		
 		//Back Button 2
@@ -325,6 +330,13 @@ public class AdminGUI {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(337, 112, 101, 25);
+		panel_7.add(comboBox);
+		panel_3.setVisible(false);
+		comboBox.insertItemAt("-none-", 0);		
+		db.select_query_categories(comboBox);
+		
 		btnBack3.setBounds(90, 50, 110, 25);
 		btnBack3.setForeground(Color.WHITE);
 		btnBack3.setBackground(Color.RED);

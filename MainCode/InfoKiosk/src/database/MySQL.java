@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JComboBox;
+
 public class MySQL {
 	Connection conn = null;
 	Statement stmt = null;
@@ -59,12 +61,25 @@ public class MySQL {
 	
 // Method For Select all suported categories
 	
-	public int select_query_categories() {
+	public int select_query_categories(JComboBox comboBox) {
+		try {
+			
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Categories");
+			while (rs.next())
+			{
+				comboBox.addItem(rs.getString("Category"));
+			}			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
 		
 		return 0;
 	}
 // Method For Select All Points of one Category
 	public int select_query_points_of_category() {
+		
 		
 		return 0;
 	}

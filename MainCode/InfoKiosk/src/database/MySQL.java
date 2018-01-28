@@ -1,6 +1,8 @@
 package database;
 
 import com.mysql.*;
+import com.mysql.jdbc.PreparedStatement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class MySQL {
 	Connection conn = null;
@@ -90,7 +93,28 @@ public class MySQL {
 	}
 // Method For adding new category
 	
-	public int add_category_query() {
+	public int add_category_query(String category) {
+		try {
+		      if(!category.equals("") && category_exist_query(category)==0) {		    	  
+			      // the mysql insert statement
+			      String query = " INSERT INTO Categories (Category) VALUES(?)";
+			      // create the mysql insert preparedstatement
+			      PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
+			      preparedStmt.setString (1, category);
+			      // execute the preparedstatement
+			      preparedStmt.execute();
+			      if(category_exist_query(category)==1) {
+			    	  JOptionPane.showMessageDialog(null, "Successful Crate Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);
+			      }			     									
+		      }
+		      else {
+		    	  JOptionPane.showMessageDialog(null, "Invalid Category Details","Create Category Error",JOptionPane.ERROR_MESSAGE);
+		      }
+		} 
+		catch (Exception e) {
+			e.printStackTrace();	
+			JOptionPane.showMessageDialog(null, "Invalid Category Details","Create Category Error",JOptionPane.ERROR_MESSAGE);
+		}
 		
 		return 0;
 	}
@@ -108,4 +132,30 @@ public class MySQL {
 		return 0;
 	}
 	
+// Method For Category check, Return 0 if category dose not exist and Return 1 if exist 
+	public int category_exist_query(String category) {
+		String cat = null;
+		try {
+			
+			if(category!=null&&category!="") {
+				stmt = conn.createStatement(); 
+				rs = stmt.executeQuery("SELECT Category FROM Categories Where Category='"+category+"'");
+				if(rs.next()) {
+					cat = rs.getString("Category");
+				}
+				else {
+					cat=null;
+				}
+			}
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
+		if( category.equals(cat) && cat!=null ) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 }

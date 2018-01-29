@@ -30,9 +30,15 @@ import java.awt.event.ActionEvent;
 public class AdminGUI {
 
 	private JFrame frame;
-
-	
-
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	//Combobox
+	private JComboBox CategoryComboBox1 = new JComboBox();
+	private JComboBox CategoryComboBox = new JComboBox();
+	private JComboBox comboBox = new JComboBox();
+	private JComboBox EditCategoryComboBox = new JComboBox();	
+			
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +47,7 @@ public class AdminGUI {
 			public void run() {
 				try {
 					AdminGUI window = new AdminGUI();
-					
+				
 					window.frame.setVisible(true);
 					
 					
@@ -197,6 +203,7 @@ public class AdminGUI {
 		
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(0, 128, 128));
 		panel_3.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
@@ -204,7 +211,7 @@ public class AdminGUI {
 		
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(Color.RED);
+		panel_6.setBackground(new Color(0, 128, 128));
 		panel_6.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_6);
 		panel_6.setVisible(false);
@@ -255,6 +262,11 @@ public class AdminGUI {
 				panel_5.setVisible(true);
 				lblWelcomeCreateCategory.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
+				
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);							
 			}
 		});
 		btnBack1.addActionListener(new ActionListener() {
@@ -303,6 +315,11 @@ public class AdminGUI {
 				panel_5.setVisible(true);
 				lblWelcomeCreatePoint.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);
+				
 			}
 		});
 		btnBack2.addActionListener(new ActionListener() {
@@ -315,6 +332,67 @@ public class AdminGUI {
 		btnBack2.setBackground(Color.RED);
 		panel_6.add(btnBack2);
 		
+		
+		//Point text
+		JTextField PointTextField = new JTextField();
+		PointTextField.setBounds(( ( ( int ) width/2)-93), 180, 186, 30);
+		panel_6.add(PointTextField);
+		PointTextField.setColumns(10);
+		
+		//Area text
+		JTextField AreaTextField = new JTextField();
+		AreaTextField.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
+		panel_6.add(AreaTextField);
+		AreaTextField.setColumns(10);
+		
+		
+		CategoryComboBox1.setBounds(( ( ( int ) width/2)-93), 300, 186, 30);
+		panel_6.add(CategoryComboBox1);
+		CategoryComboBox1.insertItemAt("-none-", 0);		
+		db.select_query_categories(CategoryComboBox1);
+		
+		//Description text
+		JTextPane PointDescriptionTextPane = new JTextPane();
+		PointDescriptionTextPane.setBounds(( ( ( int ) width/2)-150), 360, 300, 120);
+		panel_6.add(PointDescriptionTextPane);
+		
+		//Button Category create
+		JButton btnCreatePoint = new JButton("Create Point");
+		
+		btnCreatePoint.setBounds(( ( ( int ) width/2)-93), 540, 186, 30);
+		btnCreatePoint.setForeground(Color.WHITE);
+		btnCreatePoint.setBackground(new Color(0, 51, 51));		
+		panel_6.add(btnCreatePoint);
+		
+		JLabel lblPointCreate = new JLabel("Write Point:");
+		lblPointCreate.setBounds(( ( ( int ) width/2)-93-100), 180, 186, 30);
+		panel_6.add(lblPointCreate);
+		
+		JLabel lblAreaCreate = new JLabel("Write Area :");
+		lblAreaCreate.setBounds(( ( ( int ) width/2)-93-100), 240, 186, 30);
+		panel_6.add(lblAreaCreate);
+		
+		JLabel lblCategoryPointCreate = new JLabel("Select Category:");
+		lblCategoryPointCreate.setBounds(( ( ( int ) width/2)-93-130), 300, 186, 30);
+		panel_6.add(lblCategoryPointCreate);
+		
+		JLabel lblDescriptionCreate = new JLabel("Write Description :");
+		lblDescriptionCreate.setBounds(( ( ( int ) width/2)-93-200), 390, 186, 30);
+		panel_6.add(lblDescriptionCreate);
+		
+		
+		
+		btnCreatePoint.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String pointcreate = PointTextField.getText();
+				String areacreate = AreaTextField.getText();
+				String categorycreate = (String) CategoryComboBox1.getSelectedItem();
+				String descriptioncreate = PointDescriptionTextPane.getText();				
+				db.add_point_query(pointcreate,areacreate,categorycreate,descriptioncreate);	
+			}
+		});
+		
 		//Back Button 3
 		JButton btnBack3 = new JButton("Back");
 		btnBack3.addMouseListener(new MouseAdapter() {
@@ -323,26 +401,49 @@ public class AdminGUI {
 				panel_7.setVisible(false);
 				panel_5.setVisible(true);
 				lblWelcomeLoginTo.setVisible(true);
-				lblWelcomeDeleteCategory.setVisible(false);
+				lblWelcomeDeleteCategory.setVisible(false);	
+				
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);
 			}
 		});
 		btnBack3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(337, 112, 101, 25);
-		panel_7.add(comboBox);
-		panel_3.setVisible(false);
-		comboBox.insertItemAt("-none-", 0);		
-		db.select_query_categories(comboBox);
+		
+		CategoryComboBox.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
+		panel_7.add(CategoryComboBox);
+		panel_3.setVisible(false);			
+		db.select_query_categories(CategoryComboBox);
+		CategoryComboBox.setSelectedIndex(0);
 		
 		btnBack3.setBounds(90, 50, 110, 25);
 		btnBack3.setForeground(Color.WHITE);
 		btnBack3.setBackground(Color.RED);
 		panel_7.add(btnBack3);
+		
+		JButton btnDeleteCategory_1 = new JButton("Delete Category");
+		btnDeleteCategory_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String category= (String)CategoryComboBox.getSelectedItem();
+				db.delete_category_query(category);				
+				db.select_query_categories(CategoryComboBox);				
+			}
+		});
+		btnDeleteCategory_1.setBounds(( ( ( int ) width/2)-93), 360, 186, 30);
+		btnDeleteCategory_1.setForeground(Color.WHITE);		
+		btnDeleteCategory_1.setBackground(new Color(0, 51, 51));
+		panel_7.add(btnDeleteCategory_1);		
 		panel_7.setVisible(false);
 		
+		JLabel lblCategoryDelete = new JLabel("Select Category :");
+		lblCategoryDelete.setBounds(( ( ( int ) width/2)-93-130), 240, 186, 30);
+		panel_7.add(lblCategoryDelete);
+
 		//Back Button 4
 		JButton btnBack4 = new JButton("Back");		
 		btnBack4.addMouseListener(new MouseAdapter() {
@@ -353,6 +454,10 @@ public class AdminGUI {
 				lblWelcomeDeletePoint.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
 				
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);
 				
 			}
 		});
@@ -364,6 +469,10 @@ public class AdminGUI {
 		btnBack4.setForeground(Color.WHITE);
 		btnBack4.setBackground(Color.RED);
 		panel_8.add(btnBack4);
+		
+		JButton btnDeleteThisPoint = new JButton("Delete Point");
+		btnDeleteThisPoint.setBounds(0, 0, 117, 25);
+		panel_8.add(btnDeleteThisPoint);
 		panel_8.setVisible(false);
 		
 		//Back Button 5
@@ -375,6 +484,12 @@ public class AdminGUI {
 				panel_5.setVisible(true);
 				lblWelcomeEditPoint.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
+				
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);
+				
 			}
 		});
 		btnBack5.addActionListener(new ActionListener() {
@@ -386,6 +501,46 @@ public class AdminGUI {
 		btnBack5.setForeground(Color.WHITE);
 		btnBack5.setBackground(Color.RED);
 		panel_9.add(btnBack5);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(0, 0, 186, 30);
+		panel_9.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(0, 0, 186, 30);
+		panel_9.add(textField_1);
+		
+		
+		comboBox.setBounds(0, 0, 186, 30);
+		panel_9.add(comboBox);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(0, 0, 300, 120);
+		panel_9.add(textPane);
+		
+		JButton button = new JButton("Create Point");
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 51, 51));
+		button.setBounds(0, 0, 186, 30);
+		panel_9.add(button);
+		
+		JLabel label = new JLabel("Write Point:");
+		label.setBounds(0, 0, 186, 30);
+		panel_9.add(label);
+		
+		JLabel label_1 = new JLabel("Write Area :");
+		label_1.setBounds(0, 0, 186, 30);
+		panel_9.add(label_1);
+		
+		JLabel label_2 = new JLabel("Select Category:");
+		label_2.setBounds(0, 0, 186, 30);
+		panel_9.add(label_2);
+		
+		JLabel label_3 = new JLabel("Write Description :");
+		label_3.setBounds(0, 0, 186, 30);
+		panel_9.add(label_3);
 		panel_9.setVisible(false);
 
 		//Back Button 6
@@ -397,6 +552,12 @@ public class AdminGUI {
 				panel_5.setVisible(true);
 				lblWelcomeEditCategory.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
+				
+				db.select_query_categories(CategoryComboBox1);
+				db.select_query_categories(CategoryComboBox);
+				db.select_query_categories(comboBox);
+				db.select_query_categories(EditCategoryComboBox);
+				
 			}
 		});
 		btnBack6.addActionListener(new ActionListener() {
@@ -408,7 +569,19 @@ public class AdminGUI {
 		btnBack6.setForeground(Color.WHITE);
 		btnBack6.setBackground(Color.RED);
 		panel_10.add(btnBack6);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(0, 0, 114, 19);
+		panel_10.add(textField_2);
+		textField_2.setColumns(10);
 		panel_10.setVisible(false);
+				
+		
+		EditCategoryComboBox.setBounds(337, 112, 101, 25);
+		panel_10.add(EditCategoryComboBox);		
+		EditCategoryComboBox.insertItemAt("-none-", 0);		
+		db.select_query_categories(EditCategoryComboBox);
+		
 
 	//Main Menu Buttons	
 		//Create Category Button
@@ -543,5 +716,7 @@ public class AdminGUI {
 		lblCcKodikasMe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCcKodikasMe.setHorizontalTextPosition(SwingConstants.CENTER);
 		panel_2.add(lblCcKodikasMe, BorderLayout.CENTER);
+		
 	}
+	
 }

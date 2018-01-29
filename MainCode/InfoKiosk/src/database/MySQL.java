@@ -63,16 +63,18 @@ public class MySQL {
 	}
 	
 // Method For Select all suported categories
-	
 	public int select_query_categories(JComboBox comboBox) {
 		try {
+			comboBox.removeAllItems();
+			comboBox.insertItemAt("-none-", 0);
 			
 			stmt = conn.createStatement(); 
 			rs = stmt.executeQuery("SELECT * FROM Categories");
 			while (rs.next())
 			{
 				comboBox.addItem(rs.getString("Category"));
-			}			
+			}
+			comboBox.setSelectedIndex(0);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();			
@@ -80,36 +82,39 @@ public class MySQL {
 		
 		return 0;
 	}
+	
 // Method For Select All Points of one Category
 	public int select_query_points_of_category() {
 		
 		
 		return 0;
 	}
+	
 // Method For Select All Data From One Point
 	public int select_query_data_of_point() {
 		
 		return 0;		
 	}
-// Method For adding new category
 	
+// Method For adding new category	
 	public int add_category_query(String category) {
 		try {
-		      if(!category.equals("") && category_exist_query(category)==0) {		    	  
-			      // the mysql insert statement
-			      String query = " INSERT INTO Categories (Category) VALUES(?)";
-			      // create the mysql insert preparedstatement
-			      PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
-			      preparedStmt.setString (1, category);
-			      // execute the preparedstatement
-			      preparedStmt.execute();
-			      if(category_exist_query(category)==1) {
-			    	  JOptionPane.showMessageDialog(null, "Successful Crate Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);
-			      }			     									
-		      }
-		      else {
-		    	  JOptionPane.showMessageDialog(null, "Invalid Category Details","Create Category Error",JOptionPane.ERROR_MESSAGE);
-		      }
+			
+		    if(!category.equals("") && category_exist_query(category)==0) {		    	  
+		    	// the mysql insert statement
+			    String query = " INSERT INTO Categories (Category) VALUES(?)";
+			    // create the mysql insert preparedstatement
+			    PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
+			    preparedStmt.setString (1, category);
+			    // execute the preparedstatement
+			    preparedStmt.execute();
+			    if(category_exist_query(category)==1) {
+			    	JOptionPane.showMessageDialog(null, "Successful Crate Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);
+			    }			     									
+		    }
+		    else {
+		    	JOptionPane.showMessageDialog(null, "Invalid Category Details","Create Category Error",JOptionPane.ERROR_MESSAGE);
+		    }
 		} 
 		catch (Exception e) {
 			e.printStackTrace();	
@@ -118,17 +123,86 @@ public class MySQL {
 		
 		return 0;
 	}
+	
 // Method For adding new point	
-	public int add_point_query() {
-		
+	public int add_point_query(String pointcreate, String areacreate, String categorycreate, String descriptioncreate) {
+		try {
+			if(!pointcreate.equals("") && !areacreate.equals("") && !categorycreate.equals("") && !categorycreate.equals(null) && point_exist_query(pointcreate)==0) {
+				int categoryid=get_category_id(categorycreate);	
+				// the mysql insert statement
+				String query = " INSERT INTO Points (Point,Point_Description,Popularity,Category_ID,Area) VALUES(?,?,?,?,?)";
+				// create the mysql insert preparedstatement
+				PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
+				preparedStmt.setString (1, pointcreate);
+				preparedStmt.setString (2, descriptioncreate);
+				preparedStmt.setInt (3, 0);
+				preparedStmt.setInt (4, categoryid);
+				preparedStmt.setString (5, areacreate);
+				// execute the preparedstatement
+				preparedStmt.execute();
+				if(point_exist_query(pointcreate)==1) {
+					JOptionPane.showMessageDialog(null, "Successful Crate Point!","Successful!",JOptionPane.INFORMATION_MESSAGE);
+				}			     									
+				}
+			else {
+				JOptionPane.showMessageDialog(null, "Invalid Point Details","Create Point Error",JOptionPane.ERROR_MESSAGE);
+			}	
+		}
+		catch (Exception e){
+			e.printStackTrace();	
+			JOptionPane.showMessageDialog(null, "Invalid Point Details","Create Point Error",JOptionPane.ERROR_MESSAGE);			
+		}
 		return 0;
 	}
+	
+// Method For getting category id	
+	public int get_category_id(String categorycreate) {
+		int categoryid = 0;		
+		try {			
+			if(categorycreate!=null) {
+				stmt = conn.createStatement(); 
+				rs = stmt.executeQuery("SELECT Category_ID FROM Categories Where Category='"+categorycreate+"'");
+				if(rs.next()) {
+					categoryid = rs.getInt("Category_ID");
+				}
+				else {
+					categoryid=0;
+				}
+			}
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
+		return categoryid;			
+	}
+
 // Method For deleting category
-	public int delete_category_query() {
+	public int delete_category_query(String category) {
+		try {
+			// the mysql insert statement
+			String query = " DELETE FROM Categories WHERE Category = ?";
+			// create the mysql insert preparedstatement
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);			
+			preparedStmt.setString (1, category);
+			// execute the preparedstatement
+			preparedStmt.execute();
+			if(category_exist_query(category)==0) {
+				JOptionPane.showMessageDialog(null, "Successful Delete Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);				
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Invalid Delete Details","Delete Point Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+			JOptionPane.showMessageDialog(null, "Invalid Delete Details","Delete Point Error",JOptionPane.ERROR_MESSAGE);
+		}
 		return 0;
 	}
+	
 // Method For deleting point
 	public int delete_point_query(){
+		
 		return 0;
 	}
 	
@@ -152,6 +226,33 @@ public class MySQL {
 			e.printStackTrace();			
 		}
 		if( category.equals(cat) && cat!=null ) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+// Method For Point check, Return 0 if point dose not exist and Return 1 if exist 
+	public int point_exist_query(String point) {
+		String pnt = null;
+		try {
+			
+			if(point!=null&&point!="") {
+				stmt = conn.createStatement(); 
+				rs = stmt.executeQuery("SELECT Point FROM Points Where Point='"+point+"'");
+				if(rs.next()) {
+					pnt = rs.getString("Point");
+				}
+				else {
+					pnt=null;
+				}
+			}
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
+		if( point.equals(pnt) && pnt!=null ) {
 			return 1;
 		}
 		else {

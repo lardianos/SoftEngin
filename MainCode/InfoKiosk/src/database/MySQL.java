@@ -84,10 +84,25 @@ public class MySQL {
 	}
 	
 // Method For Select All Points of one Category
-	public int select_query_points_of_category() {
-		
+	public int select_query_points_of_category(JComboBox comboBox) {
+		try {
+			comboBox.removeAllItems();
+			comboBox.insertItemAt("-none-", 0);
+			
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Points");
+			while (rs.next())
+			{
+				comboBox.addItem(rs.getString("Point"));
+			}
+			comboBox.setSelectedIndex(0);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
 		
 		return 0;
+
 	}
 	
 // Method For Select All Data From One Point
@@ -201,8 +216,26 @@ public class MySQL {
 	}
 	
 // Method For deleting point
-	public int delete_point_query(){
-		
+	public int delete_point_query(String point){
+		try {
+			// the mysql insert statement
+			String query = " DELETE FROM Points WHERE Point = ?";
+			// create the mysql insert preparedstatement
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);			
+			preparedStmt.setString (1, point);
+			// execute the preparedstatement
+			preparedStmt.execute();
+			if(point_exist_query(point)==0) {
+				JOptionPane.showMessageDialog(null, "Successful Delete Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);				
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Invalid Delete Details","Delete Point Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+			JOptionPane.showMessageDialog(null, "Invalid Delete Details","Delete Point Error",JOptionPane.ERROR_MESSAGE);
+		}
 		return 0;
 	}
 	

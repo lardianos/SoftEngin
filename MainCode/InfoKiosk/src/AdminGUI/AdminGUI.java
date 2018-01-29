@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 
 public class AdminGUI {
@@ -33,12 +34,13 @@ public class AdminGUI {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	//Combobox
+	//Category Combobox
 	private JComboBox CategoryComboBox1 = new JComboBox();
 	private JComboBox CategoryComboBox = new JComboBox();
 	private JComboBox comboBox = new JComboBox();
 	private JComboBox EditCategoryComboBox = new JComboBox();	
-			
+	//Point Combobox
+	JComboBox PointComboBox = new JComboBox();
 	/**
 	 * Launch the application.
 	 */
@@ -46,11 +48,8 @@ public class AdminGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminGUI window = new AdminGUI();
-				
-					window.frame.setVisible(true);
-					
-					
+					AdminGUI window = new AdminGUI();				
+					window.frame.setVisible(true);		
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -203,7 +202,7 @@ public class AdminGUI {
 		
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(0, 128, 128));
+		panel_3.setBackground(SystemColor.desktop);
 		panel_3.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
@@ -211,7 +210,7 @@ public class AdminGUI {
 		
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(new Color(0, 128, 128));
+		panel_6.setBackground(SystemColor.desktop);
 		panel_6.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_6);
 		panel_6.setVisible(false);
@@ -219,14 +218,14 @@ public class AdminGUI {
 		
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.YELLOW);
+		panel_7.setBackground(SystemColor.desktop);
 		panel_7.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_7);
 		panel_7.setLayout(null);	
 		panel_7.setVisible(false);
 		
 		JPanel panel_8 = new JPanel();
-		panel_8.setBackground(Color.MAGENTA);
+		panel_8.setBackground(SystemColor.desktop);
 		panel_8.setBounds(0, 100, (int)width,(int)height-200);
 		panel_1.add(panel_8);
 		panel_8.setLayout(null);
@@ -266,7 +265,8 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox1);
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
-				db.select_query_categories(EditCategoryComboBox);							
+				db.select_query_categories(EditCategoryComboBox);	
+				db.select_query_points_of_category(PointComboBox);
 			}
 		});
 		btnBack1.addActionListener(new ActionListener() {
@@ -319,7 +319,7 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
-				
+				db.select_query_points_of_category(PointComboBox);
 			}
 		});
 		btnBack2.addActionListener(new ActionListener() {
@@ -407,6 +407,7 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
+				db.select_query_points_of_category(PointComboBox);
 			}
 		});
 		btnBack3.addActionListener(new ActionListener() {
@@ -458,6 +459,7 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
+				db.select_query_points_of_category(PointComboBox);
 				
 			}
 		});
@@ -471,9 +473,30 @@ public class AdminGUI {
 		panel_8.add(btnBack4);
 		
 		JButton btnDeleteThisPoint = new JButton("Delete Point");
-		btnDeleteThisPoint.setBounds(0, 0, 117, 25);
+		
+		btnDeleteThisPoint.setBounds(( ( ( int ) width/2)-93), 360, 186, 30);
+		btnDeleteThisPoint.setForeground(Color.WHITE);		
+		btnDeleteThisPoint.setBackground(new Color(0, 51, 51));
 		panel_8.add(btnDeleteThisPoint);
+		
+		JLabel lblSelectPoint = new JLabel("Select Point:");
+		lblSelectPoint.setBounds(( ( ( int ) width/2)-93-130), 240, 186, 30);
+		panel_8.add(lblSelectPoint);
+		
+		
+		PointComboBox.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
+		panel_8.add(PointComboBox);
 		panel_8.setVisible(false);
+		db.select_query_points_of_category(PointComboBox);
+		
+		btnDeleteThisPoint.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String Point = (String) PointComboBox.getSelectedItem();
+				db.delete_point_query(Point);
+				db.select_query_points_of_category(PointComboBox);
+			}
+		});
 		
 		//Back Button 5
 		JButton btnBack5 = new JButton("Back");		
@@ -489,6 +512,7 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
+				db.select_query_points_of_category(PointComboBox);
 				
 			}
 		});
@@ -557,6 +581,7 @@ public class AdminGUI {
 				db.select_query_categories(CategoryComboBox);
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
+				db.select_query_points_of_category(PointComboBox);
 				
 			}
 		});
@@ -718,5 +743,4 @@ public class AdminGUI {
 		panel_2.add(lblCcKodikasMe, BorderLayout.CENTER);
 		
 	}
-	
 }

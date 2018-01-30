@@ -11,6 +11,8 @@ import java.sql.Statement;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class MySQL {
 	Connection conn = null;
@@ -106,8 +108,28 @@ public class MySQL {
 	}
 	
 // Method For Select All Data From One Point
-	public int select_query_data_of_point() {
-		
+	public int select_query_data_of_point(String point, JTextField editPointTextField, JTextField editAreaTextField, JComboBox comboBox, JTextPane editDescriptionTextPane) {
+		try {
+			
+			comboBox.removeAllItems();	
+			select_query_categories(comboBox);
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Points INNER JOIN Categories ON Categories.Category_ID = Points.Category_ID WHERE Point='"+point+"'");
+
+			while (rs.next())
+			{
+				editPointTextField.setText(rs.getString("Point"));
+				editAreaTextField.setText(rs.getString("Area"));
+				comboBox.insertItemAt(rs.getString("Category"), 0);
+				editDescriptionTextPane.setText(rs.getString("Point_Description"));
+			}
+			
+			comboBox.setSelectedIndex(0);
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
 		return 0;		
 	}
 	
@@ -292,4 +314,36 @@ public class MySQL {
 			return 0;
 		}
 	}
+	
+// Method For Edit Points
+	public void edit_point_query(String point, String edpoint, String edarea, String edcategory, String eddescription) {
+try {		
+			int cat_id=0;
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Categories WHERE Category='"+edcategory+"'");
+			while (rs.next())
+			{
+				cat_id=rs.getInt("Category_ID");
+			}
+			System.out.println(cat_id+point+edpoint+edarea+edcategory+eddescription);
+			
+			// the mysql insert statement
+			String query = " UPDATE Points SET Point = ?,Point_Description = ?,Category_ID = ?,Area = ? WHERE Point =?";
+			// create the mysql insert preparedstatement
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);			
+			preparedStmt.setString (1,edpoint);
+			preparedStmt.setString (2,eddescription);
+			preparedStmt.setInt (3,cat_id);
+			preparedStmt.setString (4,edarea);
+			preparedStmt.setString (5,point);			
+			// execute the preparedstatement
+			preparedStmt.execute();
+			JOptionPane.showMessageDialog(null, "Successful Edited Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}
+		
+	}
 }
+

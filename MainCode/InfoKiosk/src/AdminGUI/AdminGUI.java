@@ -633,19 +633,39 @@ public class AdminGUI {
 		btnBack6.setBackground(Color.RED);
 		panel_10.add(btnBack6);
 		
+		JLabel lblSelect = new JLabel("Select Category :");
+		lblSelect.setBounds(( ( ( int ) width/2)-93-130), 180, 186, 30);
+		panel_10.add(lblSelect);
+		
+		EditCategoryComboBox.setBounds(( ( ( int ) width/2)-93), 180, 186, 30);
+		panel_10.add(EditCategoryComboBox);				
+		db.select_query_categories(EditCategoryComboBox);	
+		
 		JTextField textField_2 = new JTextField();
-		textField_2.setBounds(0, 0, 114, 19);
+		textField_2.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
 		panel_10.add(textField_2);
 		textField_2.setColumns(10);
-		panel_10.setVisible(false);
-				
+		panel_10.setVisible(false);			
 		
-		EditCategoryComboBox.setBounds(337, 112, 101, 25);
-		panel_10.add(EditCategoryComboBox);		
-		EditCategoryComboBox.insertItemAt("-none-", 0);		
-		db.select_query_categories(EditCategoryComboBox);
+		JButton btnChangeCategory = new JButton("Change Category");
 		
-
+		btnChangeCategory.setBounds(( ( ( int ) width/2)-93), 300, 186, 30);
+		btnChangeCategory.setForeground(Color.WHITE);
+		btnChangeCategory.setBackground(new Color(0, 51, 51));
+		panel_10.add(btnChangeCategory);
+		
+		EditCategoryComboBox.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		    	textField_2.setText((String)EditCategoryComboBox.getSelectedItem());		    			    	
+		    }
+		});
+		btnChangeCategory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				db.edit_category_query((String)EditCategoryComboBox.getSelectedItem(),textField_2.getText());
+				db.select_query_categories(EditCategoryComboBox);
+			}
+		});
 	//Main Menu Buttons	
 		//Create Category Button
 		JButton btnCreateNewCategory = new JButton("Create New Category");

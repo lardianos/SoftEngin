@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
@@ -360,6 +362,46 @@ public class MySQL {
 		catch (Exception e) {
 			e.printStackTrace();			
 		}
+	}
+
+	public void select_point_data_of_category(String point, JLabel lblArea2, JLabel lblPointName, JTextPane txtrArea) {
+		try {			
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Points WHERE Point='"+point+"'");
+			
+			while (rs.next())
+			{
+				lblArea2.setText(rs.getString("Area"));
+				lblPointName.setText(rs.getString("Point"));
+				txtrArea.setText(rs.getString("Point_Description"));
+			}
+			
+
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}	
+		
+	}
+
+	public void select_points_of_category(JComboBox pointComboBox, String category) {
+		try {			
+			pointComboBox.removeAllItems();	
+			pointComboBox.insertItemAt("none", 0);
+			stmt = conn.createStatement(); 
+			rs = stmt.executeQuery("SELECT * FROM Points INNER JOIN Categories ON Categories.Category_ID = Points.Category_ID WHERE Category='"+category+"'");
+			
+			while (rs.next())
+			{
+				pointComboBox.addItem(rs.getString("Point"));
+			}
+			
+			pointComboBox.setSelectedIndex(0);
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}		
 	}
 }
 

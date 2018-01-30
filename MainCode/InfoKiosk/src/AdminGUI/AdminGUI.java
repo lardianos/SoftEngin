@@ -73,8 +73,7 @@ public class AdminGUI {
 		MySQL db = new MySQL();
 		db.dbconnect();
 		frame = new JFrame();
-		frame.setUndecorated(true);
-		//frame.setBounds(100, 100, 800, 700);
+		frame.setUndecorated(true);		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setUndecorated(true);
@@ -647,7 +646,7 @@ public class AdminGUI {
 		textField_2.setColumns(10);
 		panel_10.setVisible(false);			
 		
-		JButton btnChangeCategory = new JButton("Change Category");
+		JButton btnChangeCategory = new JButton("Edit Category");
 		
 		btnChangeCategory.setBounds(( ( ( int ) width/2)-93), 300, 186, 30);
 		btnChangeCategory.setForeground(Color.WHITE);

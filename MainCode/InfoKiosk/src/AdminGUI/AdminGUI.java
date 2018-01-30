@@ -31,16 +31,16 @@ import java.awt.SystemColor;
 public class AdminGUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+
 	//Category Combobox
 	private JComboBox CategoryComboBox1 = new JComboBox();
 	private JComboBox CategoryComboBox = new JComboBox();
 	private JComboBox comboBox = new JComboBox();
+	
 	private JComboBox EditCategoryComboBox = new JComboBox();	
 	//Point Combobox
 	JComboBox PointComboBox = new JComboBox();
+	JComboBox EditPointCombobox = new JComboBox();
 	/**
 	 * Launch the application.
 	 */
@@ -267,6 +267,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);	
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 			}
 		});
 		btnBack1.addActionListener(new ActionListener() {
@@ -320,6 +322,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 			}
 		});
 		btnBack2.addActionListener(new ActionListener() {
@@ -408,6 +412,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 			}
 		});
 		btnBack3.addActionListener(new ActionListener() {
@@ -460,6 +466,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 				
 			}
 		});
@@ -513,6 +521,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 				
 			}
 		});
@@ -525,48 +535,74 @@ public class AdminGUI {
 		btnBack5.setForeground(Color.WHITE);
 		btnBack5.setBackground(Color.RED);
 		panel_9.add(btnBack5);
+
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(0, 0, 186, 30);
-		panel_9.add(textField);
+		JTextField EditPointTextField = new JTextField();
+		EditPointTextField.setColumns(10);
+		EditPointTextField.setBounds(( ( ( int ) width/2)-93), 180, 186, 30);
+		panel_9.add(EditPointTextField);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(0, 0, 186, 30);
-		panel_9.add(textField_1);
+		JTextField EditAreaTextField = new JTextField();
+		EditAreaTextField.setColumns(10);
+		EditAreaTextField.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
+		panel_9.add(EditAreaTextField);
+			
 		
+		comboBox.setBounds(( ( ( int ) width/2)-93), 300, 186, 30);
+		panel_9.add(comboBox);		
+		db.select_query_categories(comboBox);
 		
-		comboBox.setBounds(0, 0, 186, 30);
-		panel_9.add(comboBox);
+		JTextPane EditDescriptionTextPane = new JTextPane();
+		EditDescriptionTextPane.setBounds(( ( ( int ) width/2)-93-110), 360, 400, 180);
+		panel_9.add(EditDescriptionTextPane);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(0, 0, 300, 120);
-		panel_9.add(textPane);
+		JButton btnEditPoint1 = new JButton("Edit Point");
 		
-		JButton button = new JButton("Create Point");
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 51, 51));
-		button.setBounds(0, 0, 186, 30);
-		panel_9.add(button);
+		btnEditPoint1.setForeground(Color.WHITE);
+		btnEditPoint1.setBackground(new Color(0, 51, 51));
+		btnEditPoint1.setBounds(( ( ( int ) width/2)-93), 570, 186, 30);
+		panel_9.add(btnEditPoint1);
 		
 		JLabel label = new JLabel("Write Point:");
-		label.setBounds(0, 0, 186, 30);
+		label.setBounds(( ( ( int ) width/2)-93-130), 180, 186, 30);
 		panel_9.add(label);
 		
 		JLabel label_1 = new JLabel("Write Area :");
-		label_1.setBounds(0, 0, 186, 30);
+		label_1.setBounds(( ( ( int ) width/2)-93-130), 240, 186, 30);
 		panel_9.add(label_1);
 		
 		JLabel label_2 = new JLabel("Select Category:");
-		label_2.setBounds(0, 0, 186, 30);
+		label_2.setBounds(( ( ( int ) width/2)-93-130), 300, 186, 30);
 		panel_9.add(label_2);
 		
 		JLabel label_3 = new JLabel("Write Description :");
-		label_3.setBounds(0, 0, 186, 30);
+		label_3.setBounds(( ( ( int ) width/2)-93-250), 430, 186, 30);
 		panel_9.add(label_3);
-		panel_9.setVisible(false);
+		
+		JLabel label_4 = new JLabel("Select Point:");
+		label_4.setBounds(( ( ( int ) width/2)-93 - 130), 120, 186, 30);
+		panel_9.add(label_4);
+		
 
+		EditPointCombobox.setBounds(( ( ( int ) width/2)-93), 120, 186, 30);
+		panel_9.add(EditPointCombobox);
+		panel_9.setVisible(false);
+		db.select_query_points_of_category(EditPointCombobox);
+		
+		EditPointCombobox.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		    	
+		    	String point = (String) EditPointCombobox.getSelectedItem();		    	
+		    	db.select_query_data_of_point(point,EditPointTextField,EditAreaTextField,comboBox,EditDescriptionTextPane);
+		        
+		    }
+		});
+		btnEditPoint1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				db.edit_point_query((String)EditPointCombobox.getSelectedItem(),EditPointTextField.getText(),EditAreaTextField.getText(),(String)comboBox.getSelectedItem(),EditDescriptionTextPane.getText());
+			}
+		});
 		//Back Button 6
 		JButton btnBack6 = new JButton("Back");		
 		btnBack6.addMouseListener(new MouseAdapter() {
@@ -582,6 +618,8 @@ public class AdminGUI {
 				db.select_query_categories(comboBox);
 				db.select_query_categories(EditCategoryComboBox);
 				db.select_query_points_of_category(PointComboBox);
+				db.select_query_points_of_category(EditPointCombobox);
+				db.select_query_categories(comboBox);
 				
 			}
 		});
@@ -595,7 +633,7 @@ public class AdminGUI {
 		btnBack6.setBackground(Color.RED);
 		panel_10.add(btnBack6);
 		
-		textField_2 = new JTextField();
+		JTextField textField_2 = new JTextField();
 		textField_2.setBounds(0, 0, 114, 19);
 		panel_10.add(textField_2);
 		textField_2.setColumns(10);

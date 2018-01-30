@@ -317,7 +317,7 @@ public class MySQL {
 	
 // Method For Edit Points
 	public void edit_point_query(String point, String edpoint, String edarea, String edcategory, String eddescription) {
-try {		
+		try {		
 			int cat_id=0;
 			stmt = conn.createStatement(); 
 			rs = stmt.executeQuery("SELECT * FROM Categories WHERE Category='"+edcategory+"'");
@@ -325,7 +325,6 @@ try {
 			{
 				cat_id=rs.getInt("Category_ID");
 			}
-			System.out.println(cat_id+point+edpoint+edarea+edcategory+eddescription);
 			
 			// the mysql insert statement
 			String query = " UPDATE Points SET Point = ?,Point_Description = ?,Category_ID = ?,Area = ? WHERE Point =?";
@@ -338,12 +337,29 @@ try {
 			preparedStmt.setString (5,point);			
 			// execute the preparedstatement
 			preparedStmt.execute();
+			JOptionPane.showMessageDialog(null, "Successful Edited Point!","Successful!",JOptionPane.INFORMATION_MESSAGE);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();			
+		}		
+	}
+	public void edit_category_query(String selectedItem, String text) {		
+		try {		
+			
+			// the mysql insert statement
+			String query = " UPDATE Categories SET Category = ? WHERE Category =?";
+			// create the mysql insert preparedstatement
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);			
+			preparedStmt.setString (1,text);
+			preparedStmt.setString (2,selectedItem);
+			
+			// execute the preparedstatement
+			preparedStmt.execute();
 			JOptionPane.showMessageDialog(null, "Successful Edited Category!","Successful!",JOptionPane.INFORMATION_MESSAGE);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();			
 		}
-		
 	}
 }
 

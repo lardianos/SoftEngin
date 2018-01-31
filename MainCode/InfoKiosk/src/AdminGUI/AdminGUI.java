@@ -138,23 +138,23 @@ public class AdminGUI {
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 0, (int) width, 103);
-		panel_4.setBackground(new Color(0, 51, 51));
-		panel_1.add(panel_4);
-		panel_4.setLayout(null);
+		JPanel panel4 = new JPanel();
+		panel4.setBounds(0, 0, (int) width, 103);
+		panel4.setBackground(new Color(0, 51, 51));
+		panel_1.add(panel4);
+		panel4.setLayout(null);
 		
 		JLabel lblWelcomeLoginTo = new JLabel("Welcome! Login to Manage Info-Kiosk.");
 		lblWelcomeLoginTo.setBounds(0, 0, (int) width, 103);
 		lblWelcomeLoginTo.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeLoginTo);
+		panel4.add(lblWelcomeLoginTo);
 		lblWelcomeLoginTo.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeLoginTo.setForeground(new Color(255, 255, 255));
 		
 		JLabel lblWelcomeCreatePoint = new JLabel("Create A New Point!");
 		lblWelcomeCreatePoint.setBounds(0, 0, (int) width, 103);
 		lblWelcomeCreatePoint.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeCreatePoint);
+		panel4.add(lblWelcomeCreatePoint);
 		lblWelcomeCreatePoint.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeCreatePoint.setForeground(new Color(255, 255, 255));
 		lblWelcomeCreatePoint.setVisible(false);
@@ -162,7 +162,7 @@ public class AdminGUI {
 		JLabel lblWelcomeCreateCategory = new JLabel("Create A New Category!");
 		lblWelcomeCreateCategory.setBounds(0, 0, (int) width, 103);
 		lblWelcomeCreateCategory.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeCreateCategory);
+		panel4.add(lblWelcomeCreateCategory);
 		lblWelcomeCreateCategory.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeCreateCategory.setForeground(new Color(255, 255, 255));
 		lblWelcomeCreateCategory.setVisible(false);
@@ -170,7 +170,7 @@ public class AdminGUI {
 		JLabel lblWelcomeDeletePoint = new JLabel("Delete One Point!");
 		lblWelcomeDeletePoint.setBounds(0, 0, (int) width, 103);
 		lblWelcomeDeletePoint.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeDeletePoint);
+		panel4.add(lblWelcomeDeletePoint);
 		lblWelcomeDeletePoint.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeDeletePoint.setForeground(new Color(255, 255, 255));
 		lblWelcomeDeletePoint.setVisible(false);
@@ -178,7 +178,7 @@ public class AdminGUI {
 		JLabel lblWelcomeDeleteCategory = new JLabel("Delete One Category!");
 		lblWelcomeDeleteCategory.setBounds(0, 0, (int) width, 103);
 		lblWelcomeDeleteCategory.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeDeleteCategory);
+		panel4.add(lblWelcomeDeleteCategory);
 		lblWelcomeDeleteCategory.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeDeleteCategory.setForeground(new Color(255, 255, 255));
 		lblWelcomeDeleteCategory.setVisible(false);
@@ -186,7 +186,7 @@ public class AdminGUI {
 		JLabel lblWelcomeEditPoint = new JLabel("Edit One Point!");
 		lblWelcomeEditPoint.setBounds(0, 0, (int) width, 103);
 		lblWelcomeEditPoint.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeEditPoint);
+		panel4.add(lblWelcomeEditPoint);
 		lblWelcomeEditPoint.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeEditPoint.setForeground(new Color(255, 255, 255));
 		lblWelcomeEditPoint.setVisible(false);
@@ -194,7 +194,7 @@ public class AdminGUI {
 		JLabel lblWelcomeEditCategory = new JLabel("Edit One Category!");
 		lblWelcomeEditCategory.setBounds(0, 0, (int) width, 103);
 		lblWelcomeEditCategory.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblWelcomeEditCategory);
+		panel4.add(lblWelcomeEditCategory);
 		lblWelcomeEditCategory.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblWelcomeEditCategory.setForeground(new Color(255, 255, 255));
 		lblWelcomeEditCategory.setVisible(false);
@@ -208,11 +208,11 @@ public class AdminGUI {
 		
 		
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(SystemColor.desktop);
-		panel_6.setBounds(0, 100, (int)width,(int)height-200);
-		panel_1.add(panel_6);
-		panel_6.setVisible(false);
+		JPanel panel6 = new JPanel();
+		panel6.setBackground(SystemColor.desktop);
+		panel6.setBounds(0, 100, (int)width,(int)height-200);
+		panel_1.add(panel6);
+		panel6.setVisible(false);
 		
 		
 		
@@ -312,7 +312,7 @@ public class AdminGUI {
 		btnBack2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panel_6.setVisible(false);
+				panel6.setVisible(false);
 				panel_5.setVisible(true);
 				lblWelcomeCreatePoint.setVisible(false);
 				lblWelcomeLoginTo.setVisible(true);
@@ -329,35 +329,35 @@ public class AdminGUI {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		panel_6.setLayout(null);
+		panel6.setLayout(null);
 		btnBack2.setBounds(90, 50, 110, 25);
 		btnBack2.setForeground(Color.WHITE);
 		btnBack2.setBackground(Color.RED);
-		panel_6.add(btnBack2);
+		panel6.add(btnBack2);
 		
 		
 		//Point text
 		JTextField PointTextField = new JTextField();
 		PointTextField.setBounds(( ( ( int ) width/2)-93), 180, 186, 30);
-		panel_6.add(PointTextField);
+		panel6.add(PointTextField);
 		PointTextField.setColumns(10);
 		
 		//Area text
 		JTextField AreaTextField = new JTextField();
 		AreaTextField.setBounds(( ( ( int ) width/2)-93), 240, 186, 30);
-		panel_6.add(AreaTextField);
+		panel6.add(AreaTextField);
 		AreaTextField.setColumns(10);
 		
 		
 		CategoryComboBox1.setBounds(( ( ( int ) width/2)-93), 300, 186, 30);
-		panel_6.add(CategoryComboBox1);
+		panel6.add(CategoryComboBox1);
 		CategoryComboBox1.insertItemAt("-none-", 0);		
 		db.select_query_categories(CategoryComboBox1);
 		
 		//Description text
 		JTextPane PointDescriptionTextPane = new JTextPane();
 		PointDescriptionTextPane.setBounds(( ( ( int ) width/2)-150), 360, 300, 120);
-		panel_6.add(PointDescriptionTextPane);
+		panel6.add(PointDescriptionTextPane);
 		
 		//Button Category create
 		JButton btnCreatePoint = new JButton("Create Point");
@@ -365,23 +365,23 @@ public class AdminGUI {
 		btnCreatePoint.setBounds(( ( ( int ) width/2)-93), 540, 186, 30);
 		btnCreatePoint.setForeground(Color.WHITE);
 		btnCreatePoint.setBackground(new Color(0, 51, 51));		
-		panel_6.add(btnCreatePoint);
+		panel6.add(btnCreatePoint);
 		
 		JLabel lblPointCreate = new JLabel("Write Point:");
 		lblPointCreate.setBounds(( ( ( int ) width/2)-93-100), 180, 186, 30);
-		panel_6.add(lblPointCreate);
+		panel6.add(lblPointCreate);
 		
 		JLabel lblAreaCreate = new JLabel("Write Area :");
 		lblAreaCreate.setBounds(( ( ( int ) width/2)-93-100), 240, 186, 30);
-		panel_6.add(lblAreaCreate);
+		panel6.add(lblAreaCreate);
 		
 		JLabel lblCategoryPointCreate = new JLabel("Select Category:");
 		lblCategoryPointCreate.setBounds(( ( ( int ) width/2)-93-130), 300, 186, 30);
-		panel_6.add(lblCategoryPointCreate);
+		panel6.add(lblCategoryPointCreate);
 		
 		JLabel lblDescriptionCreate = new JLabel("Write Description :");
 		lblDescriptionCreate.setBounds(( ( ( int ) width/2)-93-200), 390, 186, 30);
-		panel_6.add(lblDescriptionCreate);
+		panel6.add(lblDescriptionCreate);
 		
 		
 		
@@ -691,7 +691,7 @@ public class AdminGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panel_5.setVisible(false);
-				panel_6.setVisible(true);
+				panel6.setVisible(true);
 				lblWelcomeLoginTo.setVisible(false);
 				lblWelcomeCreatePoint.setVisible(true);
 			}
